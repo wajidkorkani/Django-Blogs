@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Blog
 # Create your views here.
 def home(request):
@@ -11,3 +11,7 @@ def home(request):
     template = 'index.html'
     context = {'blogs': blogs}
     return render(request, template, context)
+
+def about(request, slug, pk):
+    blog =  get_object_or_404(Blog, slug=slug, id=pk)
+    return render (request, 'about.html', {'blog': blog})

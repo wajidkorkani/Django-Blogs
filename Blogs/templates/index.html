@@ -37,7 +37,7 @@
     {% endif %}
     
     <div class="col">
-        <a class="btn col-link" href="">
+        <a class="btn col-link" href="{% url 'about' blog.slug blog.id %}">
             {% if blog.image %}
             <img src="{{ blog.image.url }}">
             {% endif %}

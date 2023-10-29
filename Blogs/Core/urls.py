@@ -5,4 +5,5 @@ from Core.views import *
 
 urlpatterns = [
     path('', home, name='home'),
+    path('about/<slug:slug>/<int:pk>/', about, name='about'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
