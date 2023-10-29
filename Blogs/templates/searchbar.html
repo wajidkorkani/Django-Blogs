@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Info</title>
+<style>
+    img{
+        max-width: 100%;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<br>
+{% if blog_title %}
+<div class="container text-center">
+    {% for blog in blog_title %}
+    {% if forloop.counter0|divisibleby:4 %}
+    <div class="row">
+    {% endif %}
+    
+    <div class="col">
+        <a class="btn col-link" href="{% url 'about' blog.slug blog.id %}">
+            {% if blog.image %}
+            <img src="{{ blog.image.url }}">
+            {% endif %}
+            <br>
+            <strong style="background-color: yellow;">{{ blog.title }}</strong>
+            <p>{{ blog.time }}</p>
+        </a>
+    </div>
+
+    {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% elif blog_categoery %}
+<div class="container text-center">
+    {% for blog in blog_categoery %}
+    {% if forloop.counter0|divisibleby:4 %}
+    <div class="row">
+    {% endif %}
+    
+    <div class="col">
+        <a class="btn col-link" href="{% url 'about' blog.slug blog.id %}">
+            {% if blog.image %}
+            <img src="{{ blog.image.url }}">
+            {% endif %}
+            <br>
+            <strong style="background-color: yellow;">{{ blog.title }}</strong>
+            <p>{{ blog.time }}</p>
+        </a>
+    </div>
+
+    {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% elif blog %}
+<div class="container text-center">
+    {% for blog in blog %}
+    {% if forloop.counter0|divisibleby:4 %}
+    <div class="row">
+    {% endif %}
+    
+    <div class="col">
+        <a class="btn col-link" href="{% url 'about' blog.slug blog.id %}">
+            {% if blog.image %}
+            <img src="{{ blog.image.url }}">
+            {% endif %}
+            <br>
+            <strong>{{ blog.title }}</strong>
+            <p>{{ blog.time }}</p>
+        </a>
+    </div>
+
+    {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<h1 style="text-align: center;">Sorry this blog is not available.</h1>
+{% endif %}
+{% endblock %}

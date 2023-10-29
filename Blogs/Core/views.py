@@ -15,3 +15,10 @@ def home(request):
 def about(request, slug, pk):
     blog =  get_object_or_404(Blog, slug=slug, id=pk)
     return render (request, 'about.html', {'blog': blog})
+
+def searchbar(request):
+    searched = request.GET["searched"]
+    blog = Blog.objects.filter(title__icontains=searched)
+    title  = Blog.objects.filter(title__iexact=searched)
+    categoery  = Blog.objects.filter(categoery__iexact=searched)
+    return render(request, 'searchbar.html', {'blog': blog, 'blog_title': title, 'blog_categoery': categoery})
