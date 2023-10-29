@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Info</title>
+<style>
+    img{
+        max-width: 100%;
+    }
+    h1{
+        font-size: larger;
+    }
+    strong{
+        font-size: larger;
+    }
+    #filter{
+        background-color: rgb(239, 247, 168);
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container text-center">
+    <div id="filter" class="clearfix">
+        <form method="GET">
+            {% csrf_token %}
+            <button class="btn btn-secondary float-start" type="submit" name="n-o">New to old</button>
+        </form>
+        <form method="GET">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary float-end" name="o-n">Old to new</button>    
+        </form>
+    </div>
+</div>
+<br>
+<div class="container text-center">
+    {% for blog in blogs %}
+    {% if forloop.counter0|divisibleby:4 %}
+    <div class="row">
+    {% endif %}
+    
+    <div class="col">
+        <a class="btn col-link" href="{% url 'about' blog.slug blog.id %}">
+            {% if blog.image %}
+            <img src="{{ blog.image.url }}">
+            {% endif %}
+            <br>
+            <strong>{{ blog.title }}</strong>
+            <p>{{ blog.time }}</p>
+        </a>
+    </div>
+
+    {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}
